@@ -6,6 +6,8 @@ const fastify = require('fastify')({
 // Declare a route
 fastify.register(require('./db'))
 fastify.register(require('./shipping'))
+fastify.register(require()'./stripe')
+fastify.register(require('./coinbase'))
 
 // Run the server!
 fastify.listen(3000, function (err, address) {
