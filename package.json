@@ -18,5 +18,8 @@
   "homepage": "https://github.com/deuxfractales/asuras-path#readme",
   "dependencies": {
     "fastify-cli": "^2.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }
