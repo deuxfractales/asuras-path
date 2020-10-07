@@ -1,6 +1,6 @@
 async function stripe (fastify, options) {
     const Stripe = require('stripe');
-    const stripe = Stripe('sk_test_51HZFQ4GatoJl8CCijv4yMtPYRweLryH3RhB8A79LNFy9fVcsG5jKtsovgHSu6YzwRUe2q4hm8zOeKJydzJwqdDsZ00S7fVpVWC');
+    const stripe = Stripe('sk_test_51HPibVKRlkNsphUI7E8xkr5CoQcWbZ8l8F2JBmqHlwpOcppkq4LH4acINPkRk5lf0YyD57wOctoiWymxupiJZL0e00wAVBC3V8');
     
 
     fastify.get('/stripe', async (request, reply) => {
@@ -11,10 +11,17 @@ async function stripe (fastify, options) {
         const account = await stripe.accounts.create({
             type: 'express',
         });
+
+        const accountLinks = await stripe.accountLinks.create({
+            account:  `${account.id}`,
+            refresh_url: 'https://example.com/reauth',
+            return_url: 'https://example.com/return',
+            type: 'account_onboarding',
+        });
         console.log(account)
         reply.send({
             route: 'stripe onboarding',
-            accountID: `${account.id}`
+            msg: 'completed onboarding'
         })
     })
 }
