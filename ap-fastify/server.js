@@ -5,6 +5,7 @@ const fastify = require('fastify')({
 
 // Declare a route
 fastify.register(require('./db'))
+fastify.register(require('./auth'))
 fastify.register(require('./shipping'))
 fastify.register(require('./stripe'))
 fastify.register(require('./coinbase'))
