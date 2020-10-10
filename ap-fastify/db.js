@@ -30,17 +30,21 @@ async function db (fastify, options) {
     }, { 
       timestamps: false
     })
-
-    //const newUser = await  User.create({
-      //username: request.body.username,
-      //email: "ben@test.com",
-      //password: "12345"
-    //})
+    try {
+      const newUser = await  User.create({
+        username: request.body.username,
+        email: request.body.email,
+        password: request.body.password
+      }) 
+      reply.send(1)
+    } catch (e) {
+      /* handle error */
+      reply.send(e)
+    }
     
 
-    console.log(request.body)
+    //console.log(request.body)
 
-    reply.send("db succefully got data")
   })
 }
 

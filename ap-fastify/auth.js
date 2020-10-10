@@ -35,19 +35,24 @@ async function auth (fastify, options) {
         
       console.log('no errors in validation')
       
-      await bcrypt.hash(`${nakedPass}`, 10, function(err, hash) {
+       await bcrypt.hash(`${nakedPass}`, 10, function(err, hash) {
           hashedPass = hash
           credentials.password = `${hash}`
-      });
-      console.log(credentials)
-      axios.post('http://localhost:3000/db/user/register', credentials)
-        .then(function (response){
-          //console.log(response)
-          reply.send("sent user creds to db route")
-        }) 
-        .catch(function (error){
-          console.log(error)
-        })
+          axios.post('http://localhost:3000/db/user/register', credentials)
+            .then(function (response){
+              //console.log(response.data)
+              if (response.data === 1) {
+                reply.send('successfully saved user to db')    
+              } else {
+              console.log(response)
+              }
+            }) 
+            .catch(function (error){
+              console.log(error)
+            })
+      })
+      
+      
 
     }
   })
