@@ -1,5 +1,19 @@
 async function auth (fastify, options) {
   const bcrypt = require('bcrypt')
+  const Joi = require('joi')
+  const axios = require('axios')
+
+  const schema = Joi.object({
+    username: Joi.string()
+      .alphanum()
+      .min(3)
+      .max(30)
+      .required(),
+    email: Joi.string()
+      .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
+    password: Joi.string()
+        .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$'))
+  });
 
   fastify.get('/auth', async (request, reply) => {
     return { hello: 'world' }
@@ -12,12 +26,30 @@ async function auth (fastify, options) {
     let credentials = {
         username: req.body.username,
         email: req.body.email,
-        password: ''
+        password: `${nakedPass}`
     }
-    await bcrypt.hash(`${nakedPass}`, 10, function(err, hash) {
-        hashedPass = hash
-        reply.send(hashedPass)
-    });
+    const validation = schema.validate(credentials)
+    if (validation.error){
+      console.log(validation.error.details[0].message)
+    } else {
+        
+      console.log('no errors in validation')
+      
+      await bcrypt.hash(`${nakedPass}`, 10, function(err, hash) {
+          hashedPass = hash
+          credentials.password = `${hash}`
+      });
+      console.log(credentials)
+      axios.post('http://localhost:3000/db/user/register', credentials)
+        .then(function (response){
+          //console.log(response)
+          reply.send("sent user creds to db route")
+        }) 
+        .catch(function (error){
+          console.log(error)
+        })
+
+    }
   })
 }
 

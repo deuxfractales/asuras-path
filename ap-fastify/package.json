@@ -12,12 +12,18 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.20.0",
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "fastify": "^3.5.0",
     "fastify-cli": "^2.3.0",
     "fastify-mysql": "^2.0.1",
+    "joi": "^17.2.1",
     "jsonwebtoken": "^8.5.1",
+    "knex": "^0.21.6",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.3.5",
     "shippo": "^1.5.0",
     "stripe": "^8.107.0"
   },
