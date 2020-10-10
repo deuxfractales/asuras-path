@@ -1,7 +1,7 @@
 <template>
   <h1>hello from component</h1>
 </template>
-<scipt>
+<script>
  export default {
   name: Register
  }
