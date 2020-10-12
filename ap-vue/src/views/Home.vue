@@ -1,37 +1,18 @@
-<template class="GridHP">
-	<div>Hello</div>
-	<div>Goodbye</div>
+<template>
+  <div class="home">
+    <img alt="Vue logo" src="../assets/logo.png" />
+    <HelloWorld msg="Welcome to Your Vue.js App" />
+  </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import HelloWorld from "@/components/HelloWorld.vue";
+
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
     HelloWorld
   }
-}
+};
 </script>
-
-<style>
-	/* Extra small devices (phones, 600px and down) */
-	@media only screen and (max-width: 600px) {}
-	
-	/* Small devices (portrait tablets and large phones, 600px and up) */
-	@media only screen and (min-width: 600px) {}
-	
-	/* Medium devices (landscape tablets, 768px and up) */
-	@media only screen and (min-width: 768px) {}
-	
-	/* Large devices (laptops/desktops, 992px and up) */
-	@media only screen and (min-width: 992px) {}
-	
-	/* Extra large devices (large laptops and desktops, 1200px and up) */
-	@media only screen and (min-width: 1200px) {
-		.GridHP{
-			background-color: red;
-		}
-	}
-</style>
-
