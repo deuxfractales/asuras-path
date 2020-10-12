@@ -3,6 +3,16 @@ const fastify = require("fastify")({
   logger: true,
 });
 
+fastify.register(require('fastify-cors'), {
+  // put your options here
+  // origin: `http://${process.env.IP}:8080`,
+  origin: `http://localhost:8080`,
+  methods: ['GET,PUT,POST'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  exposedHeaders: ['Content-Range', 'X-Content-Range'],
+});
+
+
 // Declare a route
 fastify.register(require("./db"));
 fastify.register(require("./auth"));
